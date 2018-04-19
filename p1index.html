@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+	<head>
+</head>
+	<body>
+		<canvas width = "512" height = "512" id = "glcanvas">
+			Support for the canvas element is required.
+		</canvas>
+		<script src='gl-matrix-min.js'></script>	
+		<script src='p1shape.js'></script>
+		<script src='p1triangle.js'></script>
+		<script src='p1cube.js'></script>
+		<script src='p1utilities.js'></script>
+		<script src='p1shaders.js'></script>
+
+		<script>
+			var canvas = document.getElementById('glcanvas');
+			var gl = canvas.getContext('webgl2');
+
+			function RangeRand(min, max)
+			{
+				return (max - min) * Math.random() + min;
+			}
+
+			function RandomVertex(min, max)
+			{
+				return [RangeRand(min, max), RangeRand(min, max), RangeRand(min, max)];
+			}
+			
+			var colorfulShader = new Shader("colorfulVertCode", "colorfulFragCode");
+			var solidShader = new Shader("solidVertCode", "solidFragCode");
+			var phongLightingShader = new Shader('phongLightingVertexShaderCode','phongLightingFragmentShaderCode');
+			
+
+			var draw_normals = false;
+			var draw_wireframe = false;
+			var show_triangles = false;
+			var draw_cube = false;
+
+			document.addEventListener('keydown', function(event) 
+			{
+				// http://keycode.info/ is a useful resource for identifying keycode numbers.
+				switch (event.keyCode)
+				{
+					case 82://'r'
+						let v = RandomVertex(-1, 1).concat(RandomVertex(-1,1).concat(RandomVertex(-1,1)));
+						triangle.Reshape(v);
+						break;
+
+					case 78://'n'
+						draw_normals = !draw_normals;
+						break;
+
+					case 84://'t'
+						show_triangles = !show_triangles;
+						break;
+
+					case 87://'w'
+						draw_wireframe = !draw_wireframe;
+						break;
+					
+					case 67://'c'
+						draw_cube = !draw_cube;
+						break;
+				}
+			})
+			
+			var triangle = new Triangle();
+			console.log(triangle);
+			var cube = new Cube();
+			console.log(cube);
+
+			function Draw(now)
+			{
+				gl.enable(gl.DEPTH_TEST);
+				gl.depthFunc(gl.LEQUAL);
+				gl.clearColor(0.01, 0.01, 0.2, 1.0);
+				gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+				gl.viewport(0, 0, canvas.width, canvas.height);
+
+				// now is delivered in milliseconds. This converts it to seconds.
+				now = now / 1000.0;
+			
+				var prj = mat4.create();
+				mat4.perspective(prj, Radians(50.0), canvas.width / canvas.height, 0.5, 10.0);
+				
+				var mdv = mat4.create();
+				mat4.lookAt(mdv, [0.0, 0.0, 5.0], [0.0, 0.0, 0.0], [0.0, 1.0, 0.0]);
+				mat4.rotate(mdv, mdv, Radians(now * 90.0), [0.0, 1.0, 0.0]);
+
+				if (!draw_wireframe)
+				{
+					gl.useProgram(colorfulShader.GetProgram());
+					gl.uniformMatrix4fv(colorfulShader.prog.projection_matrix_handle, false, prj);
+					gl.uniformMatrix4fv(colorfulShader.prog.modelview_matrix_handle, false, mdv);
+					triangle.Draw(colorfulShader, solidShader, true, false, false, false);
+				}
+
+				if (draw_wireframe || show_triangles)
+				{
+					gl.useProgram(solidShader.GetProgram());
+					gl.uniformMatrix4fv(solidShader.prog.projection_matrix_handle, false, prj);
+					gl.uniformMatrix4fv(solidShader.prog.modelview_matrix_handle, false, mdv);
+					gl.uniform3fv(solidShader.prog.color_uniform_handle, [0.5, 1, 1]);
+					triangle.Draw(colorfulShader, solidShader, false, false, draw_wireframe, show_triangles);
+					
+				}
+
+				if (draw_normals)
+				{
+					gl.useProgram(solidShader.GetProgram());
+					gl.uniformMatrix4fv(solidShader.prog.projection_matrix_handle, false, prj);
+					gl.uniformMatrix4fv(solidShader.prog.modelview_matrix_handle, false, mdv);
+					gl.uniform3fv(solidShader.prog.color_uniform_handle, [0.5, 1, 1]);
+					triangle.Draw(colorfulShader, solidShader, false, true, false, false);
+					
+				}
+
+				if (draw_cube) {
+					gl.useProgram(colorfulShader.GetProgram());
+					gl.uniformMatrix4fv(colorfulShader.prog.projection_matrix_handle, false, prj);
+					gl.uniformMatrix4fv(colorfulShader.prog.modelview_matrix_handle, false, mdv);
+					cube.Draw(colorfulShader, solidShader, true, false, false, false);
+				}
+
+				if (draw_normals)
+				{
+					gl.useProgram(solidShader.GetProgram());
+					gl.uniformMatrix4fv(solidShader.prog.projection_matrix_handle, false, prj);
+					gl.uniformMatrix4fv(solidShader.prog.modelview_matrix_handle, false, mdv);
+					gl.uniform3fv(solidShader.prog.color_uniform_handle, [0.5, 1, 1]);
+					cube.Draw(colorfulShader, solidShader, false, true, false, false);
+					
+				}
+				gl.useProgram(null);
+
+				requestAnimationFrame(Draw);
+			}
+
+			requestAnimationFrame(Draw);
+		</script>
+	</body>
+</html>
