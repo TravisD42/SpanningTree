@@ -1,11 +1,17 @@
 <!doctype html>
 <html>
-
 <head>
-
-    <body>
-        <canvas width="1024" height="1024" id="ourCanvas">
-        </canvas>
-    </body>
 </head>
+
+<script>
+    var c = document.getElementById("ourCanvas");
+    var ctx = c.getContext("2d");
+    ctx.font = "30px Comic Sans";
+    ctx.fillText("Hello World",10,50);
+</script>
+
+<body>
+    <canvas width="1024" height="1024" id="ourCanvas"></canvas>
+</body>
+
 </html>
