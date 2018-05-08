@@ -11,8 +11,8 @@ class Node
         this.connections = [];  //List of other nodes connected to
     }
 
-    assignValue(var name)
+    assignValue(name)
     {
-        this.me = name;
+         this.me = name;
     }
 }
