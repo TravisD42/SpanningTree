@@ -3,7 +3,7 @@ var disableIncrements = false;
 var isOkayPressed = false;
 var canvasWidth = 1400;
 var canvasHeight = 800;
-var ourTree = new Tree(howMany);
+var ourTree;
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
@@ -79,7 +79,12 @@ function initializeNodes()
         isOkayPressed = true;
         disableIncrements = true;
         //   Make X amount of Nodes
-        for (var i = 0; i <= howMany; i++) 
+
+        ourTree = new Tree(howMany);
+
+        ourTree.InitializeTree();
+
+        for (var i = 0; i < howMany; i++) 
         {
             var randomWidth = Math.floor(Math.random() * canvasWidth);
             var randomHeight = Math.floor(Math.random() * canvasHeight);
