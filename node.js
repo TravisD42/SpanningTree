@@ -11,8 +11,28 @@ class Node
         this.connections = [];  //List of other nodes connected to
     }
 
-    assignValue(name)
+    setValue(name)
     {
-         this.me = name;
+        this.me = name;
+    }
+
+    setRoot(newRoot)
+    {
+        this.root = newRoot;
+    }
+
+    setHops(numHops)
+    {
+        this.hops = numHops;
+    }
+
+    addConnection(newConnection)
+    {
+        this.connections.push(newConnection);
+    }
+
+    severConnection()
+    {
+        
     }
 }
