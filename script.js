@@ -3,9 +3,7 @@ var disableIncrements = false;
 var isOkayPressed = false;
 var canvasWidth = 1400;
 var canvasHeight = 800;
-// myTree = new Tree(10);
-
-// if statement to declare howMany placement in the box to keep it centered.
+var ourTree = new Tree(howMany);
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
@@ -70,58 +68,26 @@ function decrease() {
   }
 }
 
-function initializeNodes() {
-
-    if(isOkayPressed == true)
+function initializeNodes() 
+{
+    if (isOkayPressed == true) 
     {
         console.log("Okay has already been pressed");
-    }
-    else
+    } 
+    else 
     {
-         console.log("Okay was pressed");
         isOkayPressed = true;
         disableIncrements = true;
+        //   Make X amount of Nodes
+        for (var i = 0; i <= howMany; i++) 
+        {
+            var randomWidth = Math.floor(Math.random() * canvasWidth);
+            var randomHeight = Math.floor(Math.random() * canvasHeight);
+            rect(randomWidth, randomHeight, 25, 25);
+            fill(0);
+        }
     }
-   
-//   Make X amount of Nodes
 
-//   Make Random amount of connections
-
-//   if (isOkayPressed == true) {
-//     console.log("HERE I AM DADDY");
-//     var randomWidth = Math.floor(Math.random() * canvasWidth);
-//     var randomHeight = Math.floor(Math.random() * canvasHeight);
-
-//     for (var i = 0; i < howMany; i++) {
-//       rect(randomWidth, randomHeight, 25, 25);
-//       fill(255);
-//       draw();
-//     }
-//   }
-
-//   var nodeHeight = 50;
-//   var nodeWidth = 50;
-
-    draw();
+  draw();
 }
 
-/*function drawTree()
-{
-    //Can't increase or decrease so make it so the + and - buttons don't effect 
-    var nodeHeight = 50;
-    var nodeWidth = 50;
-
-}*/
-
-// var nodeValue = 1;
-// var nodeID = "";
-
-// function generateNode(nodeValue, nodeID) {
-//   // Create a node at a random location;
-
-//   var node = document.createElement("input");
-//   node.type = "text";
-//   //document.appendChild(node);
-//   node.getElementById(nodeID).nodeValue;
-//   node.style.backgroundColor = "blue";
-// }
