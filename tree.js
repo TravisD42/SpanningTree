@@ -16,6 +16,7 @@ class Tree
         {
             this.nodes.push(new Node());
         }
+        console.log("tree");
 
         // Assign the "me" of Node: named A - Z
         var startValue = 'A'.charCodeAt(0);

@@ -40,29 +40,7 @@ function draw() {
   //Okay button
   var nodesDecided = createButton("Okay");
   nodesDecided.position(1280, 230);
-  if (nodesDecided.mousePressed() > 0) {
-    console.log("Okay Button is pressed");
-    isOkayPressed = true;
-  }
-  // Prevent reinitialization while initializing
-  if (disableIncrements != true) {
-    isOkayPressed == true;
-    nodesDecided.mousePressed(initializeNodes());
-  }
-
-  if (isOkayPressed == true) {
-    console.log("We made it");
-    var randomWidth = Math.floor(Math.random() * canvasWidth);
-    var randomHeight = Math.floor(Math.random() * canvasHeight);
-
-    for (var i = 0; i < howMany; i++) {
-      rect(randomWidth, randomHeight, 25, 25);
-      fill(255);
-      draw();
-    }
-  }
-
-  //.mousePressed(drawTree());
+  nodesDecided.mousePressed(initializeNodes);
 }
 
 function increase() {
@@ -93,28 +71,38 @@ function decrease() {
 }
 
 function initializeNodes() {
-  if (isOkayPressed == true) {
-    console.log("HERE I AM DADDY");
-    var randomWidth = Math.floor(Math.random() * canvasWidth);
-    var randomHeight = Math.floor(Math.random() * canvasHeight);
 
-    for (var i = 0; i < howMany; i++) {
-      rect(randomWidth, randomHeight, 25, 25);
-      fill(255);
-      draw();
+    if(isOkayPressed == true)
+    {
+        console.log("Okay has already been pressed");
     }
-  }
+    else
+    {
+         console.log("Okay was pressed");
+        isOkayPressed = true;
+        disableIncrements = true;
+    }
+   
+//   Make X amount of Nodes
 
-  //Can't increase or decrease so make it so the + and - buttons don't effect
+//   Make Random amount of connections
 
-  //Okay can't be pressed anymore
+//   if (isOkayPressed == true) {
+//     console.log("HERE I AM DADDY");
+//     var randomWidth = Math.floor(Math.random() * canvasWidth);
+//     var randomHeight = Math.floor(Math.random() * canvasHeight);
 
-  //Make X amount of Nodes
+//     for (var i = 0; i < howMany; i++) {
+//       rect(randomWidth, randomHeight, 25, 25);
+//       fill(255);
+//       draw();
+//     }
+//   }
 
-  //Make Random amount of connections
+//   var nodeHeight = 50;
+//   var nodeWidth = 50;
 
-  var nodeHeight = 50;
-  var nodeWidth = 50;
+    draw();
 }
 
 /*function drawTree()
@@ -125,15 +113,15 @@ function initializeNodes() {
 
 }*/
 
-var nodeValue = 1;
-var nodeID = "";
+// var nodeValue = 1;
+// var nodeID = "";
 
-function generateNode(nodeValue, nodeID) {
-  // Create a node at a random location;
+// function generateNode(nodeValue, nodeID) {
+//   // Create a node at a random location;
 
-  var node = document.createElement("input");
-  node.type = "text";
-  //document.appendChild(node);
-  node.getElementById(nodeID).nodeValue;
-  node.style.backgroundColor = "blue";
-}
+//   var node = document.createElement("input");
+//   node.type = "text";
+//   //document.appendChild(node);
+//   node.getElementById(nodeID).nodeValue;
+//   node.style.backgroundColor = "blue";
+// }
