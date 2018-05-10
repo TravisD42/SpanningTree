@@ -55,6 +55,36 @@ class Tree
             this.nodes[this.numNodes - 1 - i].addConnection(this.numNodes - 2 - i);
         }
 
+        var randAddConn = Math.floor(Math.random() * (this.numNodes - 1));
+        randAddConn = randAddConn + this.numNodes / 2;
+
+        for (var i =0; i < randAddConn; i++)
+        {
+            var conn1 = -1;
+            var conn2 = -1;
+            while(conn1 == conn2)
+            {
+                conn1 = Math.floor(Math.random() * (this.numNodes - 1));
+                conn2 = Math.floor(Math.random() * (this.numNodes - 1));
+            }
+            var alreadyConn = false;
+            for (var j =0; j < this.nodes[conn1].connections.length; j++)
+            {
+                if(this.nodes[conn1].connections[j] == conn2)
+                {
+                    alreadyConn = true;
+                    break;
+                }
+            }
+
+            if(alreadyConn)
+            {
+                continue;
+            }
+
+            this.nodes[conn1].addConnection(conn2);
+            this.nodes[conn2].addConnection(conn1);            
+        }
     }
 
     Elect()
