@@ -7,8 +7,8 @@ var ourTree;
 
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
-  //background('grey');
-  background(100, 0, 100);
+  background('grey');
+  //background(100, 0, 100);
 }
 
 function draw() {
@@ -83,6 +83,7 @@ function initializeNodes()
         ourTree = new Tree(howMany);
 
         ourTree.InitializeTree();
+        drawConnections();
     }
 
   draw();
@@ -90,30 +91,18 @@ function initializeNodes()
 
 function drawConnections()
 {
-  for(var i = 0; i < ourTree.nodes.lenghth(); i++)
+  for(var i = 0; i < ourTree.nodes.length; i++)
   {
-    for(var j = 0; i < ourTree.nodes[i].connections.lenghth(); i++)
+    for(var j = 0; j < ourTree.nodes[i].connections.length; j++)
     {
       var xfirst = ourTree.nodes[i].xcord;
       var yfirst = ourTree.nodes[i].ycord;
 
       var xsecond = ourTree.nodes[ourTree.nodes[i].connections[j]].xcord;
       var ysecond = ourTree.nodes[ourTree.nodes[i].connections[j]].ycord;
-    }
-  }
-}
 
-function drawConnections()
-{
-  for(var i = 0; i < ourTree.nodes.lenghth(); i++)
-  {
-    for(var j = 0; i < ourTree.nodes[i].connections.lenghth(); i++)
-    {
-      var xfirst = ourTree.nodes[i].xcord;
-      var yfirst = ourTree.nodes[i].ycord;
-
-      var xsecond = ourTree.nodes[ourTree.nodes[i].connections[j]].xcord;
-      var ysecond = ourTree.nodes[ourTree.nodes[i].connections[j]].ycord;
+      line(xfirst, yfirst, xsecond, ysecond);
+      fill(0);
     }
   }
 }
