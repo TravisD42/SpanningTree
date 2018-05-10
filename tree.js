@@ -35,13 +35,26 @@ class Tree
 
         for(var i = 0; i < this.numNodes / 2; i++)
         {
-            var sv = Math.floor(Math.random() * this.numNodes - 1);
-            var sv2 = Math.floor(Math.random() * this.numNodes - 1);
+            var sv = Math.floor(Math.random() * (this.numNodes - 1));
+            var sv2 = Math.floor(Math.random() * (this.numNodes - 1));
 
             var temp = this.nodes[sv];
             this.nodes[sv] = this.nodes[sv2];
             this.nodes[sv2] = temp;
         }
+
+        var indexValues = [];
+        for (var i =0; i < this.numNodes; i++)
+        {
+            indexValues.push(i);
+        }
+
+        for (var i = 0 ;i < this.numNodes - 1; i++)
+        {
+            this.nodes[i].addConnection(i + 1);
+            this.nodes[this.numNodes - 1 - i].addConnection(this.numNodes - 2 - i);
+        }
+
     }
 
     Elect()
