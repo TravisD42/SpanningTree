@@ -84,13 +84,13 @@ function initializeNodes()
 
         ourTree.InitializeTree();
 
-        for (var i = 0; i < howMany; i++) 
+        /*for (var i = 0; i < howMany; i++) 
         {
             var randomWidth = Math.floor(Math.random() * canvasWidth);
             var randomHeight = Math.floor(Math.random() * canvasHeight);
             rect(randomWidth, randomHeight, 25, 25);
             fill(0);
-        }
+        }*/
     }
 
   draw();
