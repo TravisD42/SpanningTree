@@ -89,6 +89,31 @@ class Tree
 
     Elect()
     {
+        var retVal = false;
 
+        for(var i =0; i < this.numNodes; i++)
+        {
+            for(var j = 0; j < this.nodes[i].connections.length; j++)
+            {
+                if(this.nodes[i].root > this.nodes[this.nodes[i].connections[j]].root)
+                {
+                    this.nodes[i].root = this.nodes[this.nodes[i].connections[j]].root;
+
+                    this.nodes[i].hops = this.nodes[this.nodes[i].connections[j]].hops + 1;
+                }
+                else if(this.nodes[i].root == this.nodes[this.nodes[i].connections[j]].root && this.nodes[i].hops < this.nodes[this.nodes[i].connections[j]].hops + 1)
+                {
+                    this.nodes[i].connections.splice(j, 1);
+                }
+                else if(this.nodes[i].root < this.nodes[this.nodes[i].connections[j]].root)
+                {
+                    this.nodes[i].connections.splice(j, 1);
+                }
+                
+            }
+            
+        }
+
+        return retVal;
     }
 }
