@@ -12,9 +12,17 @@ class Node
         
 
         var randomWidth = Math.floor(Math.random() * canvasWidth);
+        if(randomWidth > 1200)
+        {
+            randomWidth = randomWidth - 250;
+        }
         this.xcord = randomWidth;
 
         var randomHeight = Math.floor(Math.random() * canvasHeight);
+        if(randomHeight > 775)
+        {
+            randomHeight = randomHeight - 50;
+        }
         this.ycord = randomHeight;
 
         rect(randomWidth, randomHeight, 25, 25);
