@@ -100,14 +100,22 @@ class Tree
                     this.nodes[i].root = this.nodes[this.nodes[i].connections[j]].root;
 
                     this.nodes[i].hops = this.nodes[this.nodes[i].connections[j]].hops + 1;
+                    retVal = true;
                 }
                 else if(this.nodes[i].root == this.nodes[this.nodes[i].connections[j]].root && this.nodes[i].hops < this.nodes[this.nodes[i].connections[j]].hops + 1)
                 {
                     this.nodes[i].connections.splice(j, 1);
+                    retVal = true;
+                }
+                else if(this.nodes[i].root == this.nodes[this.nodes[i].connections[j]].root && this.nodes[i].hops > this.nodes[this.nodes[i].connections[j]].hops + 1)
+                {
+                    this.nodes[i].hops = this.nodes[this.nodes[i].connections[j]].hops + 1;
+                    retVal = true;
                 }
                 else if(this.nodes[i].root < this.nodes[this.nodes[i].connections[j]].root)
                 {
                     this.nodes[i].connections.splice(j, 1);
+                    retVal = true;
                 }
                 
             }
