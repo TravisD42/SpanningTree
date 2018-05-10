@@ -95,11 +95,11 @@ function drawConnections()
   {
     for(var j = 0; j < ourTree.nodes[i].connections.length; j++)
     {
-      var xfirst = ourTree.nodes[i].xcord;
-      var yfirst = ourTree.nodes[i].ycord;
+      var xfirst = ourTree.nodes[i].xcord + 12.5;
+      var yfirst = ourTree.nodes[i].ycord + 12.5;
 
-      var xsecond = ourTree.nodes[ourTree.nodes[i].connections[j]].xcord;
-      var ysecond = ourTree.nodes[ourTree.nodes[i].connections[j]].ycord;
+      var xsecond = ourTree.nodes[ourTree.nodes[i].connections[j]].xcord + 12.5;
+      var ysecond = ourTree.nodes[ourTree.nodes[i].connections[j]].ycord + 12.5;
 
       line(xfirst, yfirst, xsecond, ysecond);
       fill(0);
