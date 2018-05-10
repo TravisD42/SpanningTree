@@ -1,4 +1,4 @@
-var howMany = "0";
+var howMany = "3";
 var disableIncrements = false;
 var isOkayPressed = false;
 var canvasWidth = 1400;
@@ -119,6 +119,6 @@ function electNodes()
   }
   else
   {
-    
+
   }
 }
