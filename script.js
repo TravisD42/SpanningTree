@@ -83,16 +83,37 @@ function initializeNodes()
         ourTree = new Tree(howMany);
 
         ourTree.InitializeTree();
-
-        /*for (var i = 0; i < howMany; i++) 
-        {
-            var randomWidth = Math.floor(Math.random() * canvasWidth);
-            var randomHeight = Math.floor(Math.random() * canvasHeight);
-            rect(randomWidth, randomHeight, 25, 25);
-            fill(0);
-        }*/
     }
 
   draw();
 }
 
+function drawConnections()
+{
+  for(var i = 0; i < ourTree.nodes.lenghth(); i++)
+  {
+    for(var j = 0; i < ourTree.nodes[i].connections.lenghth(); i++)
+    {
+      var xfirst = ourTree.nodes[i].xcord;
+      var yfirst = ourTree.nodes[i].ycord;
+
+      var xsecond = ourTree.nodes[ourTree.nodes[i].connections[j]].xcord;
+      var ysecond = ourTree.nodes[ourTree.nodes[i].connections[j]].ycord;
+    }
+  }
+}
+
+function drawConnections()
+{
+  for(var i = 0; i < ourTree.nodes.lenghth(); i++)
+  {
+    for(var j = 0; i < ourTree.nodes[i].connections.lenghth(); i++)
+    {
+      var xfirst = ourTree.nodes[i].xcord;
+      var yfirst = ourTree.nodes[i].ycord;
+
+      var xsecond = ourTree.nodes[ourTree.nodes[i].connections[j]].xcord;
+      var ysecond = ourTree.nodes[ourTree.nodes[i].connections[j]].ycord;
+    }
+  }
+}
