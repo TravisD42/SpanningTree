@@ -8,7 +8,6 @@ var ourTree;
 function setup() {
   createCanvas(canvasWidth, canvasHeight);
   background('grey');
-  //background(100, 0, 100);
 }
 
 function draw() {
@@ -39,6 +38,11 @@ function draw() {
   var nodesDecided = createButton("Okay");
   nodesDecided.position(1280, 230);
   nodesDecided.mousePressed(initializeNodes);
+
+  //Elect button
+  var timeToElect = createButton("Calculate");
+  timeToElect.position(1268, 260);
+  timeToElect.mousePressed(electNodes);
 }
 
 function increase() {
@@ -104,5 +108,17 @@ function drawConnections()
       line(xfirst, yfirst, xsecond, ysecond);
       fill(0);
     }
+  }
+}
+
+function electNodes()
+{
+  if(isOkayPressed ==  false)
+  {
+    draw();
+  }
+  else
+  {
+    
   }
 }
