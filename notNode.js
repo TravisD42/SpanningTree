@@ -12,7 +12,7 @@ class Node
         
 
         var randomWidth = Math.floor(Math.random() * canvasWidth);
-        if(randomWidth > 1200)
+        if(randomWidth > 1170)
         {
             randomWidth = randomWidth - 250;
         }
